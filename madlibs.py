@@ -15,6 +15,7 @@ AWESOMENESS = [
 ]
 
 
+
 @app.route('/')
 def start_here():
     """Display homepage."""
@@ -60,8 +61,18 @@ def show_madlib():
     color = request.args.get("color")
     noun = request.args.get("noun")
     adjective = request.args.get("adjective")
+    feelings = request.args.getlist("feelings")
+    print(feelings)
+    feeling1= ', '.join(feelings[:-1])
+    feeling2= str(feelings[-1])
+    complete_feeling = feeling1 + ", and " + feeling2
 
-    return render_template("madlib.html", species=species, color=color, noun=noun, adjective=adjective)
+    return render_template("madlib.html", 
+                            species=species, 
+                            color=color, 
+                            noun=noun, 
+                            adjective=adjective,
+                            feelings=complete_feeling)
 
 if __name__ == '__main__':
     # Setting debug=True gives us error messages in the browser and also
